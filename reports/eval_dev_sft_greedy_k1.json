@@ -1,0 +1,8 @@
+{
+  "model": "mistralai/Ministral-8B-Instruct-2410",
+  "lora": "models/ministral8b_sft",
+  "prompt": "simple",
+  "accuracy": 0.6876208897485493,
+  "correct": 711,
+  "total": 1034
+}

@@ -1,0 +1,7 @@
+{
+  "model": "mistralai/Ministral-8B-Instruct-2410",
+  "prompt": "simple",
+  "accuracy": 0.6005802707930368,
+  "correct": 621,
+  "total": 1034
+}
