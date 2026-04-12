@@ -1,0 +1,62 @@
+# =============================================================================
+# ReasonForge - Git Ignore
+# =============================================================================
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+.venv/
+
+# Models & Checkpoints (large files)
+models/
+*.sqlite
+
+# Data (downloaded separately)
+data/spider/database/
+data/spider/*.json
+# data/llamafactory removed
+
+# Logs
+logs/*.log
+*.log
+
+# WandB
+wandb/
+
+# MLflow
+mlruns/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+coverage.xml
+
+# Build
+dist/
+build/
+*.egg-info/
+
+# Environment
+.env
+.env.local
+
+# Generated reports
+reports/*.html

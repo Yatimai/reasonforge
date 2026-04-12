@@ -1,0 +1,94 @@
+# =============================================================================
+# ReasonForge Configuration
+# STaR (Self-Taught Reasoner) for Text-to-SQL
+# =============================================================================
+
+# -----------------------------------------------------------------------------
+# Model Configuration
+# -----------------------------------------------------------------------------
+model:
+  name: "mistralai/Ministral-8B-Instruct-2410"
+  torch_dtype: "bfloat16"
+  device_map: "auto"
+
+# -----------------------------------------------------------------------------
+# LoRA Configuration (used by LLaMA-Factory)
+# -----------------------------------------------------------------------------
+lora:
+  r: 16
+  lora_alpha: 32
+  lora_dropout: 0.15
+  target_modules: "all"  # LLaMA-Factory uses "all" for automatic selection
+  bias: "none"
+  task_type: "CAUSAL_LM"
+
+# -----------------------------------------------------------------------------
+# Training Configuration
+# -----------------------------------------------------------------------------
+training:
+  output_dir: "./models/checkpoints"
+  num_train_epochs: 2
+  per_device_train_batch_size: 8
+  gradient_accumulation_steps: 2
+  learning_rate: 1.0e-4  # Actual value used in star_train.py
+  weight_decay: 0.01
+  warmup_ratio: 0.1  # Actual value used
+  lr_scheduler_type: "cosine"
+  logging_steps: 10
+  save_steps: 500
+  max_seq_length: 2048
+  gradient_checkpointing: true
+  bf16: true
+  optim: "paged_adamw_32bit"
+
+# -----------------------------------------------------------------------------
+# STaR (Self-Taught Reasoner) Configuration
+# -----------------------------------------------------------------------------
+star:
+  enabled: true
+  chain_of_thought: false  # CV prompt: no CoT
+  filter_correct_only: true
+  train_from_base: true
+  k_candidates: 8
+  difficulty_resampling: true
+
+# -----------------------------------------------------------------------------
+# Self-Improvement Loop
+# -----------------------------------------------------------------------------
+self_improvement:
+  max_iterations: 5
+  target_accuracy: 0.90
+  eval_sample_size: 7000
+  min_errors_for_finetune: 30
+
+# -----------------------------------------------------------------------------
+# Evaluation Configuration
+# -----------------------------------------------------------------------------
+evaluation:
+  execution_based: true
+  sqlite_timeout: 30
+  metrics:
+    - "result_match"
+    - "execution_accuracy"
+    - "exact_match"
+
+# -----------------------------------------------------------------------------
+# Paths
+# -----------------------------------------------------------------------------
+paths:
+  data_dir: "./data/spider"
+  model_dir: "./models"
+  logs_dir: "./logs"
+  errors_dir: "./data/errors"
+
+# -----------------------------------------------------------------------------
+# LLaMA-Factory Configuration
+# -----------------------------------------------------------------------------
+llamafactory:
+  template: "mistral"
+
+# -----------------------------------------------------------------------------
+# Prompt Configuration
+# -----------------------------------------------------------------------------
+prompt:
+  include_cell_values: true  # Include sample cell values in schema

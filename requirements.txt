@@ -1,0 +1,33 @@
+# =============================================================================
+# ReasonForge - Dependencies
+# STaR pipeline with Ministral-8B + LLaMA-Factory + LoRA + vLLM
+# =============================================================================
+
+# Training
+llamafactory>=0.9.3
+
+# Core ML
+torch>=2.1.0
+transformers>=4.48.0
+datasets>=2.16.0
+accelerate>=0.25.0
+peft>=0.13.0
+bitsandbytes>=0.41.0
+
+# Inference
+vllm
+
+# Utils
+loguru>=0.7.0
+pandas>=2.1.0
+numpy>=1.26.0
+pyyaml>=6.0.0
+tqdm>=4.66.0
+
+# MLOps
+huggingface_hub>=0.20.0
+
+# Testing
+pytest>=7.4.0
+pytest-cov>=4.1.0
+
